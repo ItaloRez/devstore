@@ -34,7 +34,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
+ 
       - uses: actions/cache@v3
         name: Setup Cypress cache
         with:
