@@ -36,15 +36,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
+        with:
+          # Disable running of tests within install job
+          runTests: false
+          build: npm run build
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
         with:
-          install: false
-          command: pnpm --dir cypress/ cypress:ci
-          start: pnpm --dir myclient/ dev
-          wait-on: 'https://localhost:3000'
-          # build: npm run build
-          # start: npm start
+          build: npm run build
+          start: npm start
