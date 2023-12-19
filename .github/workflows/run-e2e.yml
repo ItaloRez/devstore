@@ -37,11 +37,11 @@ jobs:
 
       - name: Print cypress cache by pnpm
         run: pnpm cache ls
-        
+
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
         env:
-          CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
+          CYPRESS_RUN_BINARY: $(pnpm bin)/cypress run
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
         with:
