@@ -41,7 +41,10 @@ jobs:
         env:
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
-          CYPRESS_CACHE_FOLDER: ${{ env.STORE_PATH }}/cache/Cypress
         with:
-          build: npm run build
-          start: npm start
+          install: false
+          command: pnpm --dir cypress/ cypress:ci
+          start: pnpm --dir myclient/ dev
+          wait-on: 'https://localhost:3000'
+          # build: npm run build
+          # start: npm start
