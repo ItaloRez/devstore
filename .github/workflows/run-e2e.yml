@@ -38,10 +38,9 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
         env:
-          CYPRESS_INSTALL_BINARY: 0 npm install
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
         with:
-          # install: true
+          install: false
           build: pnpm run build
           start: pnpm start
