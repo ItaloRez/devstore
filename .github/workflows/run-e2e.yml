@@ -3,35 +3,8 @@ name: Run E2E tests
 on: push
 
 jobs:
-  cypress-install:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm run build
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
-
   cypress-run:
     runs-on: ubuntu-22.04
-    needs: cypress-install
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,17 +35,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
  
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: build
-
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
         env:
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
         with:
+          install: true
           build: pnpm run build
           start: pnpm start
