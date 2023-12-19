@@ -33,14 +33,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - uses: actions/cache@v3
-        name: Setup Cypress cache
-        with:
-          path: ~/.cache
-          key: ${{ runner.os }}-cypress-installation-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-cypress-installation-
-
       - name: Install dependencies
         run: pnpm install
 
@@ -49,6 +41,7 @@ jobs:
         env:
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
+          CYPRESS_CACHE_FOLDER: ${{ env.STORE_PATH }}/cache/Cypress
         with:
           build: npm run build
           start: npm start
