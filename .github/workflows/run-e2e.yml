@@ -33,15 +33,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Cypress install
         uses: cypress-io/github-action@v6
         with:
           # Disable running of tests within install job
           runTests: false
           build: npm run build
+  
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
