@@ -34,7 +34,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
- 
+
+      - name: Print cypress cache by pnpm
+        run: pnpm cache ls
+        
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
         env:
