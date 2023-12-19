@@ -38,7 +38,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
         env:
-          CYPRESS_RUN_BINARY: ${{ env.STORE_PATH }}/node_modules/.bin/cypress
+          CYPRESS_RUN_BINARY: $(pnpm store path --silent)/cypress
           APP_URL: "http://localhost:3000"
           NEXT_PUBLIC_API_BASE_URL: "https://devstore-api-ecru.vercel.app/"
         with:
